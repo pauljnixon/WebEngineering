@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Ryu</title>
+
+<script>
+	var MAX_WIDTH = 500;
+	var MAX_HEIGHT = 500;
+	var MAX_FRAMES = 6;
+	var FRAME_WIDTH = 82;
+	var FRAME_HEIGHT = 130;
+	var count;
+	var canvas;
+	var sprite;
+	var ctx;
+	var x;
+	var y;
+	var fps = 10;
+	
+	function init()
+	{
+		canvas = document.getElementById("scene");
+		ctx = canvas.getContext("2d");
+		sprite = new Image();
+		sprite.src = "ryu-640.png";
+		count = 0;
+		x = 0;
+		setInterval(gameLoop, 1000 / fps);
+	}
+	
+	function gameLoop()
+	{
+		ctx.clearRect(0, 0, MAX_WIDTH, MAX_HEIGHT);
+		// Slicing
+		// drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+
+		ctx.drawImage(sprite, (count * FRAME_WIDTH), 0, FRAME_WIDTH, FRAME_HEIGHT, 0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+		if (count == MAX_FRAMES - 1) {
+			count = 0;
+		}
+		else {
+			count++;
+		}
+	}
+</script>
+</head>
+
+	<body onload="init()">
+		<canvas id="scene" width="500" height="500"></canvas>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Event Example</title>
+		<script>
+			var canvas;
+			var context;
+			var sprite;
+			
+			function init()
+			{
+				canvas = document.getElementById("world");
+				context = canvas.getContext('2d');
+				sprite = new Image();
+				sprite.src = 'ships.png';
+				sprite.onload = function() {
+					context.drawImage(sprite, 10, 10);
+				};
+			}
+		</script>
+	</head>
+	
+	<body onload="init()">
+		<h1>Event Example</h1>
+		<script>
+			function keypress (event)
+			{
+				if (event.keyCode == 37) {
+					alert("Left");
+				}
+				else if (event.keyCode == 39) {
+					alert("Right");
+				}
+			}
+			document.addEventListener('keydown', keypress, false);
+		</script>
+		<canvas id="world" width="500" height="500"></canvas>
+	</body>
+</html>
