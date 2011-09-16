@@ -5,42 +5,65 @@
 <title>Ryu</title>
 
 <script>
-	var MAX_WIDTH = 500;
-	var MAX_HEIGHT = 500;
-	var MAX_FRAMES = 6;
-	var FRAME_WIDTH = 82;
-	var FRAME_HEIGHT = 130;
+	var MAX_WIDTH = 500; // canvas width
+	var MAX_HEIGHT = 500; // canvas height
+	var MAX_FRAMES = 6; // to animate Ryu
+	var FRAME_WIDTH = 82; // of one frame of Ryu
+	var FRAME_HEIGHT = 130; // of one frame of Ryu
 	var count;
 	var canvas;
 	var sprite;
 	var ctx;
-	var x;
-	var y;
 	var fps = 10;
-	
+	var soundFx;
+	var x = 0;
+	var y = 0;
+	var combo = false; // to fire the special move (the dragon punch)
+
 	function init()
 	{
+		soundFx = document.getElementById("sfx");
 		canvas = document.getElementById("scene");
 		ctx = canvas.getContext("2d");
 		sprite = new Image();
 		sprite.src = "ryu-640.png";
 		count = 0;
-		x = 0;
+		document.addEventListener('keydown', function(e) {
+			if (e.keyCode == 39) {
+				x+=5; // right
+			}
+			else if (e.keyCode == 37) {
+				x-=5; // left
+			}
+			else if (e.keyCode == 38) {
+				y-=5; // up;
+			}
+			else if (e.keyCode == 40) {
+				y+=5;
+			}
+		}, false);
 		setInterval(gameLoop, 1000 / fps);
 	}
 	
 	function gameLoop()
 	{
 		ctx.clearRect(0, 0, MAX_WIDTH, MAX_HEIGHT);
-		// Slicing
+		
+		// Image slicing
 		// drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 
-		ctx.drawImage(sprite, (count * FRAME_WIDTH), 0, FRAME_WIDTH, FRAME_HEIGHT, 0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-		if (count == MAX_FRAMES - 1) {
-			count = 0;
-		}
-		else {
-			count++;
+		ctx.drawImage(sprite, (count * FRAME_WIDTH), 0, FRAME_WIDTH, FRAME_HEIGHT, x, y, FRAME_WIDTH * 3, FRAME_HEIGHT * 3);
+		if (combo) {
+			if (count == 1) {
+				soundFx.play();
+			}
+			if (count == MAX_FRAMES - 1) {
+				count = 0;
+				combo = false;
+			}
+			else {
+				count++;
+			}
 		}
 	}
 </script>
@@ -48,5 +71,6 @@
 
 	<body onload="init()">
 		<canvas id="scene" width="500" height="500"></canvas>
+		<audio src="shoryuken.mp3" id="sfx"></audio>
 	</body>
 </html>
