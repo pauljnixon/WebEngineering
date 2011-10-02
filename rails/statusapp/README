@@ -1,0 +1,6 @@
+Contains:
+
+* 1 controller (status)
+* Updated stylesheet
+* 1 view (status.html.erb)
+* Root of application is mapped to index method of status

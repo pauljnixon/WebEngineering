@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Mouse Click Test</title>
+	<script>
+		var canvas;
+		
+		function init()
+		{
+			canvas = document.getElementById("dummy");
+			canvas.addEventListener('click', callback, false);
+		}
+		
+		function callback(event)
+		{
+			console.log(event.clientX);
+			console.log(event.clientY);
+		}
+	</script>
+</head>
+
+<body onload="init()">
+	<canvas id="dummy" width="800" height="600" />
+</body>
+</html>
