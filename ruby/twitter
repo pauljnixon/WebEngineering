@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "twitter"
+
+Twitter.configure do |config|
+	config.consumer_key = "YOUR CUSTOMER KEY HERE"
+	config.consumer_secret = "YOUR CUSTOMER SECRET HERE"
+	config.oauth_token = "YOUR OAUTH TOKEN HERE"
+	config.oauth_token_secret = "YOUR OAUTH TOKEN SECRET HERE"
+end
+
+client = Twitter::Client.new
+
+begin
+	client.update("#{ARGV}")
+	puts "Tweet successfully sent"
+rescue
+	puts "Uh, something went terribly wrong..."
+end
