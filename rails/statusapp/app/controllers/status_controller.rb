@@ -4,5 +4,6 @@ class StatusController < ApplicationController
 		@processes = `ps -ax`
 		@who = `who`
 		@uptime = `uptime`
+		logger.error("*** SOMETHING TERRIBLY WENT WRONG")
 	end
 end
