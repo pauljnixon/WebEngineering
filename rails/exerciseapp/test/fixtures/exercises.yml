@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  focus_area: MyString
+  minutes_or_reps: MyString
+  calorie_formula: MyString
+  exercise_type: MyString
+  description: MyText
+  image_url: MyString
+  difficulty_level: MyString
+
+two:
+  title: MyString
+  focus_area: MyString
+  minutes_or_reps: MyString
+  calorie_formula: MyString
+  exercise_type: MyString
+  description: MyText
+  image_url: MyString
+  difficulty_level: MyString
