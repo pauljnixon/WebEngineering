@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 120: Web Engineering</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Engineering</h1>
+<h2>Ruby</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h3>Overview</h3>
+<ul>
+<li>Very simple to learn</li>
+<li>JavaScript-like syntax</li>
+<li>Very powerful libraries</li>
+</ul>
+
+<h3>Ruby Attributes</h3>
+<ul>
+<li>Functional: capable of programming via transformation</li>
+<li>Dynamically typed: type of variable is type of value</li>
+<li>Object-oriented: everything is an object, as in Java</li>
+<li>Variable name: <span class="stress">case</span> matters
+<ul>
+<li>Constants start with <code>Uppercase</code> letters. One can only assign these <span class="stress">once</span></li>
+<li>Variables start with <code>lowercase</code> letters. One can assign these multiple times.</li>
+</ul>
+</li>
+</ul>
+
+<h3>Starting with Ruby: the "Ruby Shell"</h3>
+<ul>
+<li>First step: run "ruby shell":
+<ul>
+<li>Log onto <code>sun.cs.tufts.edu</code></li>
+<li>Run ruby shell:
+<pre>
+% irb --simple-prompt
+</pre>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3>Ruby Scripting</h3>
+<ul>
+<li>File extension: <code>.rb</code></li>
+<li>Comments: <code>#</code></li>
+<li>The shebang line at the very top of the script (yes, the first line): <code>#!/usr/bin/ruby</code> --the location of the Ruby executable</li>
+</ul>
+
+<h3>Basics</h3>
+<ul>
+<li>Primitive types:
+<ul>
+<li><code>String</code></li>
+<li><code>Integer</code></li>
+<li><code>Float</code></li>
+</ul>
+</li>
+<li>Operations work on things of same type, and return same type
+<ul>
+<li><code>5/7</code> =&gt; <code>0</code> (an Integer)</li>
+<li><code>5.0/9.0</code> =&gt; <code>.55555...</code> (a Float)</li>
+</ul>
+</li>
+<li>Strings can be added and multiplied
+<ul>
+<li>"hello" + " " + "there" =&gt; "hello there"</li>
+<li>"hi"*3 =&gt; "hihihi"</li>
+</ul>
+</li>
+<li>to_s is the string casting operator
+<ul>
+<li>3.to_s =&gt; "3"</li>
+<li>3.14159.to_s = "3.14159"</li>
+</ul>
+</li>
+</ul>
+
+<h3>Strings Are Objects</h3>
+<ul>
+<li>Just like in JavaScript, strings are objects:
+<pre>
+"hello".reverse =&gt; "olleh"
+"hello".upcase =&gt; "HELLO"
+"hello".capitalize =&gt; "Hello"
+</pre>
+</li>
+<li>Objects determine methods (capitalize might do something different for a non-string)</li>
+</ul>
+
+<h3>Basic Type Casts</h3>
+<ul>
+<li>For any x,
+<ul>
+<li>x.to_s is a String</li>
+<li>x.to_i is an Integer</li>
+<li>x.to_f is a Float</li>
+</ul>
+</li>
+<li>Watch out!
+<ul>
+<li>Expressions in Ruby must <span class="stress">match in type</span></li>
+<li>4 + 5 is Integer</li>
+<li>4 + 5.0 is illegal: Integer can't be added to Float</li>
+<li>4.to_f + 5.0 =&gt; 9.0</li>
+<li>"hi" + 4 is illegal: Integer can't be added to String.</li>
+<li>"hi" + 4.to_s =&gt; "hi4"</li>
+</ul>
+</li>
+</ul>
+
+<h3>Loops</h3>
+<ul>
+<li>Consider the following:
+<pre>
+ 4.times do
+   puts "yo!"
+ end
+</pre>
+</li>
+<li>This prints:
+<pre>
+ yo!
+ yo!
+ yo!
+ yo!
+</pre>
+</li>
+<li>Reason loops are written this way is subtle. "Pure functional programming" involves:
+<ul>
+<li>Use of only single-assignment variables</li>
+<li>Use of loops without incremental calculations</li>
+</ul>
+</li>
+</ul>
+
+<h3>While Loops</h3>
+<ul>
+<li>Consider:
+<pre>
+ x = 0
+ while x &lt; 10
+   puts "x=" + x.to_s
+   x += 1
+ end
+</pre>
+</li>
+<li>Statements end with \n (newline)</li>
+<li>Don't need parens on while condition</li>
+<li>While statement scope ends with <code>end</code> statement</li>
+</ul>
+
+<h3>Conditionals</h3>
+<ul>
+<li>Consider:
+<pre>
+ x = 5
+ if x &lt; 10
+   puts "x is small"
+ else
+   puts "x is big"
+ endif
+</pre>
+</li>
+<li>No "then"</li>
+<li>Special "elsif" for long chains of if statements</li>
+</ul>
+
+<h3>User Input and Output</h3>
+<ul>
+<li>Read a string from the terminal
+<pre>
+ v = gets
+</pre>
+</li>
+<li>Write a string back to the terminal
+<pre>
+ puts "hello "+v
+</pre>
+</li>
+<li>No carriage return on string in <code>gets</code></li>
+<li>No parens required for function call</li>
+<li>No parens required for puts call either</li>
+<li>Think "logo"</li>
+</ul>
+
+<h3>Arrays</h3>
+<ul>
+<li>Consider:
+<pre>
+ arr = ["I", "am", "an", "array"]
+ puts arr[0]
+</pre>
+</li>
+<li>This prints "I"</li>
+<li>Arrays are very much like JavaScript arrays.
+<ul>
+<li>Indexes start at 0</li>
+<li>Lots of methods that act on arrays</li>
+</ul>
+</li>
+<li>Consider:
+<pre>
+ ar2 = arr.sort
+ puts ar2
+</pre>
+</li>
+<li>This prints:
+<pre>
+ I
+ am
+ an
+ array
+</pre>
+
+</li>
+<li>(because the array is in lexicographic order)</li>
+<li>You can also create a new array via <code>Array.new()</code>.  Example: <code>squares = Array.new()</code></li>
+</ul>
+
+<h3>Very Strange: Array Arithmetic</h3>
+<pre>
+ ["one", "two"]*3
+ =&gt; ["one", "two", "one", "two", "one", "two"]
+ ["one", "two", "three"]-["two"]
+ =&gt; ["one", "three"]
+</pre>
+<ul>
+<li>Multiplying arrays duplicates entries</li>
+<li>Adding arrays concatenates entries</li>
+<li>Subtracting arrays removes entries</li>
+</ul>
+
+<h3>Iterators</h3>
+<ul>
+<li>Consider:
+<pre>
+ cats = ["felix", "garfield"]
+ cats.each do |c|
+   puts c + " is a cat"
+ end
+</pre>
+</li>
+<li>cats.each: invokes an iterator over the array cats</li>
+
+<li><code>c</code>: bound to each value in turn (optional)</li>
+<li>All values are strings</li>
+<li>This prints:
+<pre>
+ felix is a cat
+ garfield is a cat
+</pre>
+</li>
+</ul>
+<h3>Iterators Over Numbers</h3>
+<ul>
+<li>Consider:
+
+<pre>
+ 4.times do |num|
+       puts num
+ end
+</pre>
+</li>
+<li>This prints:
+<pre>
+ 0
+ 1
+ 2
+ 3
+</pre>
+</li>
+<li><code>num</code>: assigned to 0-(4-1)</li>
+</ul>
+
+<h3>Hashes</h3>
+<ul>
+<li>Like JavaScript "objects"</li>
+<li>Consider:
+<pre>
+ person = {
+   "first name" =&gt; "Frank",
+   "last name" =&gt; "Furter"
+ }
+</pre>
+</li>
+<li>After this:
+<pre>
+ person["first name"]
+ =&gt; "Frank"
+ person["last name"]
+ =&gt; "Furter"
+</pre>
+</li>
+<li>Just as in Javascript, one can say unambiguously:
+<pre>
+ person["phone"] = "+1 781 555 1212"
+</pre>
+</li>
+</ul>
+
+<h3>Iterating Over Hashes</h3>
+<ul>
+<li>Consider:
+<pre>
+ person.each do |key, value|
+   puts key + "=&gt;" + value
+ end
+</pre>
+</li>
+<li>This iterates over every key/value pair:
+<pre>
+ first name=&gt;Frank
+ last name=&gt;Furter
+</pre>
+</li>
+<li>Watch out!  Order is <span class="stress">not</span> guaranteed. It could just as well have printed in another order, e.g.,
+<pre>
+ last name=&gt;Furter
+ first name=&gt;Frank
+</pre>
+</li>
+</ul>
+
+<h3>Functions</h3>
+<ul>
+<li>Consider:
+<pre>
+ def sayhello
+   puts "hello"
+ end
+ sayhello
+</pre>
+</li>
+<li>This prints:
+<pre>
+ hello
+</pre>
+</li>
+<li>Note:
+<ul>
+<li>No parens necessary</li>
+<li>No arguments necessary</li>
+</ul>
+</li>
+<li>Consider:
+<pre>
+ def menu(name,contents)
+   puts "&lt;select name='"+name+"'&gt;"
+
+   contents.each do |x|
+      puts " &lt;option&gt;"+x+"&lt;/option&gt;"
+   end
+ end
+ menu("foo", ["cats", "dogs"])
+</pre>
+</li>
+<li>This prints:
+<pre>
+ &lt;select name='foo'&gt;
+   &lt;option&gt;cats&lt;/option&gt;
+   &lt;option&gt;dogs&lt;/option&gt;
+ &lt;/select&gt;
+</pre>
+</li>
+<li>Example: <a href="https://github.com/tuftswebdev/WebEngineering/tree/master/ruby/fibonacci.rb"><code>fibonacci.rb</code></a></li>
+</ul>
+
+<h3>Reading and Writing Files</h3>
+<ul>
+<li>Files on the server can be opened, read, and written</li>
+<li>Consider:
+<pre>
+ File.open("foo.txt", "r") do |f|
+   puts "&lt;option&gt;" + f.gets + "&lt;/option&gt;"
+ end
+</pre>
+</li>
+<li>If <code>foo.txt</code> contains:
+<pre>
+ you
+ there
+</pre>
+</li>
+<li>...then the output of this is:
+<pre>
+ &lt;option&gt;you&lt;/option&gt;
+ &lt;option&gt;there&lt;/option&gt;
+</pre>
+</li>
+<li>Consider:
+<pre>
+ f = File.open("foo.txt", "w")
+ f.puts "yo"
+ f.close
+</pre>
+</li>
+<li>Note: <code>f</code> in both cases is a <span class="stress">file pointer</span>, just like <code>FILE *</code> in C</li>
+<li>If you use the latter form, you have to close the file yourself</li>
+<li>If you use the former form, you can rely on the end statement to close the file</li>
+</ul>
+
+<h3>More Examples</h3>
+<ul>
+<li><a href="https://github.com/tuftswebdev/WebEngineering/tree/master/ruby/beers.rb"><code>beers.rb</code></a></li>
+<li><a href="https://github.com/tuftswebdev/WebEngineering/tree/master/ruby/dirlist.rb"><code>dirlist.rb</code></a> - Lists all the files in <code>/usr/bin</code></li>
+</ul>
+
+<h3>Ruby Classes</h3>
+<ul>
+<li>Encapsulate idea of a thing in an object</li>
+<li>Provide methods for others to use</li>
+<li>Allow object-oriented programming</li>
+</ul>
+
+<h3>A Simple Class</h3>
+<ul>
+<li>Consider:
+<pre>
+ class Person
+     def initialize(name, address, phone)
+       @name = name
+       @address = address
+       @phone = phone
+     end
+ end
+ p = Person.new("Homer Simpson", "1600 Pennsylvania Ave", "781-555-1212")
+</pre>
+</li>
+<li>New concepts:
+<ul>
+<li><code>@name</code>: an <span class="stress">object variable</span></li>
+<li><code>name</code>: a <span class="stress">function parameter</span></li>
+<li><code>@name=name</code>: set an object variable to be the same value as a parameter</li>
+<li><code>Person.new</code>: a builtin function; calls <code>initialize</code> function</li>
+</ul>
+</li>
+<li><span class="stress">This is just like a hash!</span> <code>@name</code> is an object variable. But:
+<ul>
+<li><code>@name</code> is <span class="stress">private to the class</span></li>
+</ul>
+</li>
+</ul>
+
+<h3>Readers, Writers, and Accessors</h3>
+<ul>
+<li>To expose a thing, you must create an <span class="stress">access function</span>
+<pre>
+ def address
+    @address
+ end
+</pre>
+</li>
+<li>This function returns the address of a thing</li>
+<li>This is also called an <span class="stress">access</span> function</li>
+<li><span class="stress">No return statement</span>. The return value of a Ruby function is the value of the last statement (as in Lisp).</li>
+<li>To make it possible to change a thing, must create a "write function":
+<pre>
+ def address= (value)
+   @address = value
+ end
+</pre>
+</li>
+<li>Let's make an address book in which the name can be read, but the phone number and address can change:
+<pre>
+ class Person
+     def initialize(name, address, phone)
+       @name = name
+       @address = address
+       @phone = phone
+     end
+     # can just read name
+     def name
+       @name
+     end
+     # can read and write address
+     def address
+       @address
+     end
+     def address= (value)
+       @address = value
+     end
+     # can read and write phone
+     def phone
+       @phone
+     end
+     def phone= (value)
+       @phone = value
+     end
+ end
+ p = Person.new("Homer Simpson", "1600 Pennsylvania Ave", "781-555-1212")
+ puts p.name  # writes "Homer Simpson"
+ p.address = "springfield"  # uses address=; sets @address to "springfield"
+ puts p.phone # writes "781-555-1212"
+</pre>
+</li>
+</ul>
+
+<h3>Shorthands for Common Things</h3>
+<ul>
+<li>It gets <span class="stress">really</span> laborious to keep writing lots of readers and writers</li>
+<li>Instead: we can utilize shorthands called <span class="stress">attributes</span></li>
+<li><code>attr_reader</code>:  declare an object variable as readable. In a class:
+<pre>
+ attr_reader :address
+</pre>
+  means the same thing as writing
+<pre>
+ def address
+    @address
+ end
+</pre>
+</li>
+<li><code>attr_writer</code>: declare an object variable as writeable. In a class:
+<pre>
+ attr_writer :address
+</pre>
+  means the same thing as writing
+<pre>
+ def address=(value)
+    @address = value
+ end
+</pre>
+</li>
+<li><code>attr_accessor</code>: declare an object variable as read/write. In a class:
+<pre>
+ attr_accessor :address
+</pre>
+
+  means the same thing as
+<pre>
+ attr_reader :address
+ attr_writer :address
+</pre>
+  or, equivalently,
+<pre>
+ def address
+    @address
+ end
+ def address=(value)
+    @address = value
+ end
+</pre>
+</li>
+</ul>
+
+<h3>Class Syntax</h3>
+
+<ul>
+<li>There are some new conventions we need to understand for classes</li>
+<li><code>@thing</code> refers to the <span class="stress">value of a thing</span> that is an object variable</li>
+<li><code>:thing</code> refers instead to the <span class="stress">variable itself</span>. This is a <span class="stress">call-by-name</span> reference to the object variable with name 'thing'</li>
+<li>So, whenever you see <code>@</code>, think 'value', and whenever you see <code>:</code>, think 'name'</li>
+<li>Above, it is important for us to distinguish between <code>@address</code>: the value associated with a name, and <code>:address</code>, the key that corresponds to that   value</li>
+<li>In general, we use <code>@thing</code> when we want to talk about the value, and <code>:thing</code> when the statement is instead about the variable itself</li>
+
+<li>Example: the statement
+<pre>
+ attr_writer :name
+</pre>
+says that the object variable <code>name</code> has a writer method, <span class="stress">regardless of what its value is as a variable</span>, while the statement
+<pre>
+ @name = "homer"
+</pre>
+  refers instead to the value
+</li>
+</ul>
+
+<h3>Printing Classes</h3>
+<ul>
+<li>All we really have to do to print a class is to define the <code>to_s</code> method:
+<pre>
+ class Person
+     attr_accessor :name, :address, :phone
+     def initialize
+       @name = @address = @phone = ""
+     end
+     def to_s
+       @name + "\n" + @address + "\n" \
+             + @phone
+     end
+ end
+ p = Person.new
+ p.name = "Homer"
+ p.address = "1600 Pennsylvania Avenue"
+ p.phone = "781-555-1212"
+ puts p
+</pre>
+</li>
+<li>This prints:
+<pre>
+ Homer
+ 1600 Pennsylvania Avenue
+ 781-555-1212
+</pre>
+</li>
+</ul>
+
+<h3>RubyGems</h3>
+<ul>
+<li>Package manager for the Ruby</li>
+<li>Countless Ruby applications and libraries (in a self-contained file)</li>
+<li><a href="http://rubygems.org/" target="_blank">http://rubygems.org/</a></li>
+<li>"Don't reinvent the wheel"</li>
+<li><code>gem</code> - Management of gems on your system</li>
+<li>Installing a gem, run: <code>gem install <span class="stress">PACKAGE_NAME</span></code>.  Example: <code>gem install heroku</code></li>
+</ul>
+
+<h3><code>require</code></h3>
+<ul>
+<li>Loads another file and execute</li>
+</ul>
+
+<h3>String Interpolation</h3>
+<ul>
+<li>In PHP, you can do something like:
+<pre>
+  $name = "Frank";
+  print "Hello $name!"; // which would print "Hello Frank"
+</pre>
+</li>
+<li>In Ruby, use <code>#{<span class="stress">STRING HERE</span>}</code></li>
+<li>Example (equivalent of above):
+<pre>
+def sayhello(name)
+  puts "Hello #{name}!"
+end
+</pre>
+</li>
+</ul>
+
+<h3>Exception Handling</h3>
+<ul>
+<li><span class="def">Exception</span>: a special condition that change the normal flow of program execution.</li>
+<li>Errors in Ruby: <code>TypeError</code>, <code>SyntaxError</code>, and many others</li>
+<li>You can either <span class="stress">handle</span> an exception, and <span class="stress">raise</span> an exception</li>
+<li>To raise an exception (i.e., recognizing an error), use <code>raise</code>.  Example: <code>raise TypeError "Something is terribly wrong!"</code></li>
+<li>Exception handling in Java:
+<pre>
+try {
+  // do something
+}
+catch {
+  // an exception is caught
+}
+finally {
+  // whether thing went normal or things went wrong, always execute stuff in here
+}
+</pre>
+</li>
+<li>Exception handling in Ruby:
+<pre>
+begin
+  # do soemthing
+rescue
+  # an exception is caught
+ensure
+  # whether thing went normal or things went wrong, always execute stuff in here
+end
+</pre>
+</li>
+</ul>
+
+<h3>References</h3>
+<ul>
+<li><a href="http://www.ruby-lang.org/en/" target="_blank">Ruby Programming Language</a></li>
+<li><a href="http://ruby-doc.org/" target="_blank">Ruby-Doc</a></li>
+</ul>
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-10");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
