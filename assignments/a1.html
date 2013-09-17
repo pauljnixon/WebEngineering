@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 120: Web Engineering</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Engineering</h1>
+<h2>Assignment 1: Optimizing Frogger (or whatever your HTML5 game is)</h2>
+<h2>Due: Tuesday, September 17th at 11:59 PM</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Instructions</h2>
+<p>You are to make as many optimizations as possible to your Frogger game from COMP 20 last semester (or whatever HTML5 game you choose) using the techniques that we discussed in class.  A few requirements:</p>
+
+<ol>
+<li>You must incorporate the HTML5 offline application cache for your game.</li>
+<li>Your game must run on both the latest versions of Google Chrome and Firefox.</li>
+<li>Your game (HTML + CSS + JS + images) cannot be greater than 500 KB.</li>
+</ol>
+
+<p>Your game does not need to connect to a high score server (e.g., last year's Assignment 5).  You should remove any references to it.</p>
+
+<p>The point of this assignment is not to tinker a set of technologies but to apply a few important engineering concepts such as caching.  I also need to stress that size and resources matter.</p>
+
+<h2>The <code>README</code></h2>
+<p>The most important part of this assignment is the <code>README</code>.  Your <code>README</code> must prove to me that the performance of your game has vastly improved compared to what you wrote or what was given to you.  Specifically, you must answer the following questions:</p>
+<ol>
+<li>What optimization techniques did you use?</li>
+<li>How did you ensure that the HTML5 offline application cache worked?</li>
+<li>What tools did you use to test the performance of this updated version of your game? Using no tools for this assignment is not acceptable.</li>
+<li>What performance aspects have been improved (e.g., loading time, size)?  Please provide numbers, percentages, or letter grades.</li>
+<li>Are there potential performance issues?</li>
+</ol>
+
+<h2>Submitting the Assignment</h2>
+<p>Push all the files to the private repository that I created for you in a folder named <code>performance</code>.  Say that your private repository is named <code>mchow-comp120</code>, make sure all the files are pushed to <code>mchow-comp120/performance</code>.</p>
+
+<h2>Assessment</h2>
+<ul>
+<li><strong>(3 points)</strong> Successfully use the HTML5 offline application cache</li>
+<li><strong>(5 points)</strong> <code>README.txt</code> file</li>
+<li><strong>(1 points)</strong> The game works</li>
+<li><strong>(1 points)</strong> The HTML passes the official HTML5 validator from the W3C <a href="http://validator.w3.org/" target="_blank">http://validator.w3.org/</a>; warnings acceptable.</li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-10");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
