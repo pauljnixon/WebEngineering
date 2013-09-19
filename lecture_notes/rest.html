@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 120: Web Engineering</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Engineering</h1>
+<h2>REST</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+<h2>REST</h2>
+
+<h3>REpresentational State Transfer (REST)</h3>
+<ul>
+<li>So far, we are familiar CRUD (Create, Read, Update, Delete)</li>
+<li>REST: Describes <span class="stress">resources</span> (URLs) on which we can perform <span class="stress">actions</span></li>
+<li>A design pattern for web applications not only resources but also standard HTTP verbs</li>
+<li>Recall COMP 20, servers communicate with clients using stateless connections.  Also, recall the HTTP verbs: {POST, GET, DELETE, PUT}</li>
+<li>Example 1: to fetch a list of articles, which one of the HTTP commands do you use?
+<ul>
+<li>Answer: GET.  So the URL <code>/articles</code> will issue a GET request.  To fetch a particular article, <code>/articles/3</code></li>
+</ul>
+</li>
+<li>Example 2: to add an article, which one of the HTTP commands do you use?
+<ul>
+<li>Answer: POST.  BUT, using the same path as above</li>
+</ul>
+</li>
+
+<li>The work of Roy Thomas Felding, his Ph.D. thesis in 2000 <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+<li>Questions:
+<ul>
+<li>How do URLs get mapped to a controller and action?</li>
+<li>How do <code>link_to</code>, <code>redirect_to</code>, etc. generate their URLs?</li>
+</ul>
+</li>
+</ul>
+
+<h3>REST Principles</h3>
+<ul>
+<li>Give every "thing" an ID</li>
+<li>Link things together</li>
+<li>Use standard methods</li>
+<li>Resources with multiple representations</li>
+<li>Communicate statelessly</li>
+</ul>
+
+<h3>The <code>config/routes.rb</code> file</h3>
+<ul>
+<li>Rules written in Ruby for mapping incoming URLs to controllers/actions.  Two purposes for a rule:
+<ol>
+<li>Map incoming URL to controller / action / params</li>
+<li>Generate URL to controller / action / params</li>
+</ol>
+</li>
+<li><code>rake routes</code> - See a list of all the routes defined for your app</li>
+<li>Example, what you have seen so far: <code>/posts/view/2</code>.  In English, this roughly translates into "Please let me view the post with the id number 2"</li>
+<li>So what does REST have to do with CRUD?  A lot: each HTTP interaction should specify, on its own, a CRUD operation and which object to do it on.</li>
+</ul>
+
+<h3>Demo</h3>
+<ul>
+<li>All scaffolds are RESTful by default</li>
+<li><code>rails restful</code> (or <code>rails new restful</code> in Rails 3)</li>
+<li><code>ruby script/generate scaffold article title:string summary:text content:text</code> (or <code>rails generate scaffold article title:string summary:text content:text</code> in Rails 3)</li>
+<li><code>rake db:migrate</code></li>
+<li>Notice the seven standard methods for all resource-based routes:
+<ul>
+<li>index (<code>/article</code>) - GET; a list of all resources</li>
+<li>create (<code>/article</code>) - POST; create a new resource from the data in the POST request, adding it to the collection</li>
+<li>new (<code>/article/new</code>) - GET; constructs a new resource and passes it to the client but will not be saved (read: blank form)</li>
+<li>show (<code>/article/#</code>) - GET; returns the contents of one resource identified by <code>params[:id]</code></li>
+<li>update (<code>/article/#</code>) - PUT; update the contents of one resource identified by <code>params[:id]</code></li>
+<li>edit (<code>/article/#/edit</code>) - GET; returns the contents of one resource identified by <code>params[:id]</code> in form suitable for editing</li>
+<li>destroy (<code>/article/#/</code>) - DELETE; destroys the resource identified by <code>params[:id]</code></li>
+</ul>
+</li>
+</ul>
+
+<h3>Custom Routes</h3>
+<ul>
+<li>Regular routes using <code>match</code>.  Example: <code>match "<span class="stress">some_name</span>" =&gt; "<span class="stress">controller</span>#action</code></li>
+<li>Named routes.  Example: <code>map "exit" =&gt; 
+session#destroy", :as =&gt; :logout</code></li>
+<li>RESTful route: Example: <code>resources :photos </code>.  This will create the seven standard methods as listed in the demo above!  This will also create a number of helpers:
+<ul>
+<li><code>photos_url</code> and <code>photos_path</code>: map to the path for the index action (i.e., <code>/photos</code>)</li>
+<li><code>new_photo_url</code> and <code>new_photo_path</code>: map to the path for the new action (i.e., <code>/photos/new</code>)</li>
+<li><code>edit_photo_url</code> and <code>edit_photo_path</code>: map to the path for the edit action (i.e., <code>photos/:id/edit</code>)</li>
+<li><code>photo_url</code> and <code>photo_path</code>: map to the path for the show action (i.e., <code>/photo/:id</code>)</li>
+<li>Example:
+<pre>
+photos_url # => "http://www.example.com/photos"
+photos_path # => "/photos" 
+</pre>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3>Generating and XML or JSON Feed (Your API)</h3>
+<ul>
+<li>To XML, in your controller: <code>format.xml  { render :xml => @<span class="stress">OBJECT</span>.to_xml() }</code></li>
+<li>With records that references an object: <code>format.xml {render :layout => false, :xml => @OBJECT1.to_xml(:include => :OBJECT2)}</code></li>
+<li>Example: <code>format.xml {render :layout => false, :xml => @product.to_xml(:include => :orders)}</code></li>
+<li>To JSON, in your controller: <code>format.json  { render :json => @<span class="stress">OBJECT</span>.to_xml() }</code></li>
+</ul>
+
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-10");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
