@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 120: Web Engineering</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Engineering</h1>
+<h2>Assignment 2: MessageHub</h2>
+<h2>Due: Thursday, October 3rd at 11:59 PM</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Overview</h2>
+<p>In this assignment, you will be writing a simple but useful system for pushing and pulling short text messages.  Messages can be sent from any device or application, including various mobile apps.</p>
+
+<h2>Instructions</h2>
+<p>Create a Rails app that has one controller with several views, and two models for pushing and pulling short text message(s).  <span class="note">NOTE: You are not allowed to use Rails scaffolding for this assignment!</span></p>
+
+<h2>The Models</h2>
+<p>This app shall have two models with the following fields and constraints:</p>
+<ol>
+	<li>App
+		<ul>
+			<li><code>app_title</code> (string) - Application title.  Example: Messenger-Android. This field cannot be empty.</li>
+			<li><code>description</code> (text) - Description for application.  Example: A simple messaging app for Android. This field cannot be empty.</li>
+			<li><code>active</code> (boolean) - Whether this app is active (i.e., deleted).  By default, all apps are active.</li>
+		</ul>
+	</li>
+	<li>Message
+		<ul>
+			<li><code>app_id</code> (int) - The app ID where the message came from.  This field cannot be empty.</li>
+			<li><code>content</code> (string) - The message.  Must be at most 160 characters long. This field cannot be empty.</li>
+			<li><code>username</code> (string) - The creator of the message.  Must be between 3 and 60 characters long, inclusive.  Only alphanumeric, underscore, and dash characters allowed. This field cannot be empty.</li>
+			<li><code>active</code> (boolean) - Whether this message is active (i.e., deleted).  By default, all messages are active.</li>
+		</ul>
+	</li>
+</ol>
+<p class="note">IMPORTANT: An app can have many messages coming from it.</p>
+
+<h2>The Controller and Views</h2>
+
+<h2>The Routes</h2>
+<p>In the end, your routing table should look something like this:</p>
+<pre>
+message GET  /messages(.:format)     messages#index {:format=>true}
+        POST /messages(.:format)     messages#create {:format=>true}
+             /messages/:id(.:format) messages#show
+   root      /                       messages#index
+</pre>
+
+<h2>Getting Started</h2>
+
+<h2>Submitting the Assignment</h2>
+
+<h2>Assessment</h2>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-10");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
