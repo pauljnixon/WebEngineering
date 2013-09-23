@@ -21,7 +21,7 @@
 <div class="inner">
 <h1>Web Engineering</h1>
 <h2>Assignment 2: MessageHub</h2>
-<h2>Due: Thursday, October 3rd at 11:59 PM</h2>
+<h2>Due: Tuesday, October 8th at 11:59 PM</h2>
 </div>
 </header>
 
@@ -30,10 +30,10 @@
 <section id="main-content">
 
 <h2>Overview</h2>
-<p>In this assignment, you will be writing a simple but useful system for pushing and pulling short text messages.  Messages can be sent from any device or application, including various mobile apps.</p>
+<p>In this assignment, you will be writing a simple but useful system for pushing and pulling short messages.  Messages can be sent from any device or application, including various mobile apps.</p>
 
 <h2>Instructions</h2>
-<p>Create a Rails app that has one controller with several views, and two models for pushing and pulling short text message(s).  <span class="note">NOTE: You are not allowed to use Rails scaffolding for this assignment!</span></p>
+<p>Create a Rails app that has one controller, two HTML views, and two models for pushing and pulling short messages.  <span class="note">NOTE: You are not allowed to use Rails scaffolding for this assignment!</span></p>
 
 <h2>The Models</h2>
 <p>This app shall have two models with the following fields and constraints:</p>
@@ -56,7 +56,33 @@
 </ol>
 <p class="note">IMPORTANT: An app can have many messages coming from it.</p>
 
-<h2>The Controller and Views</h2>
+<h2>Seeding of Data</h2>
+<p>Using the <code>db/seeds.rb</code> file, seed the <code>apps</code> database table with the following information:</p>
+<pre>
+	app_title | app_description
+	----------------------------------
+	ios       | From iOS app
+	android   | From Android app
+	web       | From default web app
+	unknown   | From an unknown source
+</pre>
+<p>The app_id for each app will be automatically generated with an auto-incremented number.</p>
+
+<h2>The Controller</h2>
+<p>Only one controller shall exist: <code>messages_controller</code>, with three actions:</p>
+<ol>
+	<li><code>index</code> - Get all active messages, render in HTML or JSON format (more details below).</li>
+	<li><code>create</code> - Creates message via JSON format.  Example on creating a message using curl: <code>curl --data 'message[username]=britney&amp;message[content]=Hello&amp;message[app_id]=1' http://127.0.0.1:3000/messages</code>.  Data creation via HTML form post is not allowed.</li>
+	<li><code>show</code> - Get one message via specified ID, render in HTML or JSON format.</li>
+</ol>
+<p>You must also configure the root of your web application to point to the <code>index</code> action of <code>messsages_controller</code>.</p>
+
+<h2>The Index HTML View</h2>
+<p>The index HTML view (e.g., via <code>http://localhost:3000/</code>) displays all active messages in descending order: newest messages at the top to oldest message at the bottom.  You must also poll the server for new messages at a duration of your choosing, and display only the newest messages from the top.  That is, you are not allowed to re-render the entire page (i.e., refresh) and cannot duplicate the display of messages.</p>
+
+<h2>Display of Message in Index or Show HTML Views</h2>
+<p>When you display a message via <code>show</code> or <code>index</code> actions in HTML format, you must display the content, username, and created at time <span class="stress">in time ago format, in English.</span>.  Example:</p>
+<p><img src="../images/messages.png" alt="Messages" /></p>
 
 <h2>The Routes</h2>
 <p>In the end, your routing table should look something like this:</p>
@@ -68,10 +94,37 @@ message GET  /messages(.:format)     messages#index {:format=>true}
 </pre>
 
 <h2>Getting Started</h2>
+<ol>
+	<li><code>rails new messagehub</code></li>
+	<li><code>rails generate model message ...</code></li>
+	<li><code>rails generate model app ...</code></li>
+	<li><code>rails generate controller messages ...</code></li>
+</ol>
+
+<h2>Notes</h2>
+<ul>
+	<li>You are strongly encouraged to use jQuery.</li>
+	<li>For now, you can use sqlite as the database for the application.</li>
+	<li>There is a jQuery plugin called <code><a href="http://timeago.yarp.com/" target="_blank">timeago</a></code> that can convert a timestamp to the time ago in English words.</p>
+</ul>
 
 <h2>Submitting the Assignment</h2>
+<p>Push all the files to the private repository that I created for you in a folder named <code>a2</code>.  Say that your private repository is named <code>mchow-comp120</code>, make sure all the files are pushed to <code>mchow-comp120/a2</code>.</p>
+<p>I also strongly encourage you to push your app to Heroku.  Should you push your app to Heroku, please put Heroku URL in your <code>README</code>.  You must still push your source code to GitHub.</p>
 
 <h2>Assessment</h2>
+<ul>
+	<li>(1 point) <code>README</code> in either text or markdown format</li>
+	<li>(1 point) Assignment pushed to private GitHub repository to <code>a2</code> directory</li>
+	<li>(2 points) The <code>App</code> model with validations and associations</li>
+	<li>(2 points) The <code>Message</code> model with validations and associations</li>
+	<li>(1 point) <code>apps</code> table is seeded with initial data</li>
+	<li>(2 points) The <code>messages_controller</code> with the three actions</li>
+	<li>(1 point) Create message via POST and JSON format to <code>create</code> action</li>
+	<li>(1 point) Root of app is set to <code>index</code> action of <code>messages_controller</code></li>
+	<li>(3 points) The index HTML view with polling and timestamp in English, time ago format</li>
+	<li>(1 point) The show HTML view with timestamp in English, time ago format</li>
+</ul>
 
 </section>
 </div>
