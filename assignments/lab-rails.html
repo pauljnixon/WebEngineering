@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 120: Web Engineering</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Engineering</h1>
+<h2>Lab: National Historic Places</h2>
+<h2>Starting In-Class on Tuesday, October 1st</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Overview</h2>
+<p>In this lab, you will deploy a Rails app to a Platform as a Service (PaaS), <a href="http://www.heroku.com/" target="_blank">Heroku</a>, so your work can be used by the world. In a small team and in a series of challenges, you team will create a web application that locates the nearest historic places within three (3) miles of your location.  The list of historic places is provided by the <a href="http://www.nps.gov/nr/" target="_blank">National Register of Historic Places</a>.</p>
+
+<h2>Getting Started</h2>
+<ol>
+	<li>Download list of historic places in the northeast region provided by the National Register of Historic Places: <a href="ne_landmarks.zip"><code>ne_landmarks.zip</code></a> (CSV, comma-separated, file compressed to ZIP).  The list has 18,246 records and the CSV file has four (4) columns: longitude, latitude, name of historic place, and info on historic place.</li>
+</ol>
+
+<h2>Challenges</h2>
+<ol>
+	<li>Load all the historic landmarks into a database.</li>
+	<li>Push your application to Heroku.</li>
+	<li>Display all the historic landmarks on map view.</li>
+	<li>Display all the historic landmarks on map view quickly for any user.</li>
+	<li>Display only the historic landmarks on map view within 3 miles of your location.</li>
+	<li>Enable basic authentication (e.g., some sort of username and password) to use this web application.</li>
+</ol>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-10");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
