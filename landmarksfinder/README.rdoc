@@ -1,0 +1,9 @@
+#Instructions
+
+1. `rails new landmarksfinder`
+2. `rails generate model landmark longitude:float latitude:float name:string info:text`
+3. `bundle exec rake db:migrate`
+4. head -n 10000 ne_landmarks.csv > ne_landmarks.csv # as Heroku's free PostgreSQL account now only allows 10000 records max
+5. Modify the db/seeds.rb file
+6. `rake db:seed`
+7. `rails generate controller mymap index`
